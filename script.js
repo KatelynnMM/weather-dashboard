@@ -11,6 +11,10 @@ function searchWeather() {
     }
 }
 
+function getCurrentDate() {
+    const currentDate = new Date();
+    return currentDate.toLocaleDateString();
+}
 
 function getCurrentWeather(city) {
     fetch(`${apiUrl}weather?q=${city}&appid=${APIKey}&units=metric`)
@@ -19,7 +23,7 @@ function getCurrentWeather(city) {
             const currentWeatherElement = document.getElementById("current-weather");
 
             const cityName = data.name;
-            const date = new Date(data.dt * 1000).toLocaleDateString();
+            const date = getCurrentDate();
             const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
             const temperature = data.main.temp;
             const humidity = data.main.humidity;
@@ -37,7 +41,6 @@ function getCurrentWeather(city) {
         })
         .catch(error => console.error("Error fetching current weather:", error));
 }
-
 
 function getForecast(city) {
     fetch(`${apiUrl}forecast?q=${city}&appid=${APIKey}&units=metric`)
@@ -70,11 +73,6 @@ function getForecast(city) {
         .catch(error => console.error("Error fetching forecast:", error));
 }
 
-
-
-
-
-
 function addToSearchHistory(city) {
     const searchHistoryElement = document.getElementById("search-history");
 
@@ -87,24 +85,11 @@ function addToSearchHistory(city) {
     searchHistoryElement.innerHTML += searchHistoryHTML;
 }
 
-
 // new from original
 function searchCityFromHistory(city) {
     document.getElementById("city-input").value = city;
     searchWeather();
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // var APIKey = "842e0ce672425128fb463dc4a383b9ab"
