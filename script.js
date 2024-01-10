@@ -48,7 +48,7 @@ function getForecast(city) {
         .then(data => {
             const forecastElement = document.getElementById("forecast");
 
-            // Extract and loop through the forecast data
+            /
             const forecastData = data.list.slice(0, 5); // Take the first 5 items for a 5-day forecast
             const forecastHTML = forecastData.map(item => {
                 const date = new Date(item.dt * 1000).toLocaleDateString();
